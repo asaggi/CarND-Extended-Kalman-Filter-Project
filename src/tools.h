@@ -29,6 +29,12 @@ public:
   */
   MatrixXd CalculateJacobian(const VectorXd& x_state);
 
+private:
+  // Small Number
+  const double EPS; 
+  
+  // Very Small Number
+  const double VEPS;
 };
 
 #endif /* TOOLS_H_ */
