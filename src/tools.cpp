@@ -70,3 +70,15 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
 	return Hj;
 }
+
+VectorXd Tools::ConvertPolarToCartesian(const Eigen::VectorXd& measurements) {
+	float p = measurements[0];
+	float phi = measurements[1];
+	float v = measurements[2];
+	float cos_phi = cos(phi);
+	float sin_phi = sin(phi);
+	VectorXd cartesian = VectorXd(4);
+	cartesian << p * cos_phi, p * sin_phi, v * cos_phi, v * sin_phi;
+	return cartesian;
+}
+

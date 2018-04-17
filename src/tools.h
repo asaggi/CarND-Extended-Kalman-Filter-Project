@@ -29,6 +29,7 @@ public:
   */
   MatrixXd CalculateJacobian(const VectorXd& x_state);
 
+  Eigen::VectorXd ConvertPolarToCartesian(const Eigen::VectorXd& measurements);
 private:
   // Small Number
   const double EPS; 
