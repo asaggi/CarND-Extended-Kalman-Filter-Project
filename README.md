@@ -10,14 +10,14 @@ INPUT: values provided by the simulator to the c++ program
 
 OUTPUT: values provided by the c++ program to the simulator
 
-["estimate_x"] <= kalman filter estimated position x
-["estimate_y"] <= kalman filter estimated position y
-["rmse_x"]
-["rmse_y"]
-["rmse_vx"]
-["rmse_vy"]
+["estimate_x"] <= kalman filter estimated position x.  
+["estimate_y"] <= kalman filter estimated position y.  
+["rmse_x"].   <= RMSE of position x.  
+["rmse_y"].  <= RMSE of position y.  
+["rmse_vx"].   <= RMSE of Velocity x.  
+["rmse_vy"].  <= RMSE of Velocity y.  
 
----
+
 
 ## Basic Build Instructions
 
@@ -27,3 +27,25 @@ OUTPUT: values provided by the c++ program to the simulator
 4. Run it: `./ExtendedKF `
 
 
+## Results
+
+In various different tests Extended Kalman Filter produces the below results. The x-position is shown as 'px', y-position as 'py', velocity in the x-direction is 'vx', while velocity in the y-direction is 'vy'. Residual error is calculated by mean squared error (MSE).
+
+###Data Set One.  
+
+Input  | MSE
+------------- | -------------
+px  | 0.103
+py  | 0.088
+vx  | 0.594
+vy  | 0.464
+
+
+###Data Set Two.  
+
+Input  | MSE
+------------- | -------------
+px  | 0.073
+py  | 0.097
+vx  | 0.426
+vy  | 0.498
