@@ -31,7 +31,7 @@ OUTPUT: values provided by the c++ program to the simulator
 
 In various different tests Extended Kalman Filter produces the below results. The x-position is shown as 'px', y-position as 'py', velocity in the x-direction is 'vx', while velocity in the y-direction is 'vy'. Residual error is calculated by mean squared error (MSE).
 
-###Data Set One.  
+###Data Set One.   
 
 Input  | MSE
 ------------- | -------------
@@ -40,8 +40,10 @@ py  | 0.088
 vx  | 0.594
 vy  | 0.464
 
+![Test One Visualization](https://github.com/asaggi/CarND-Extended-Kalman-Filter-Project/blob/master/Docs/Data_Set1.png "Test One Visualization")
+---
 
-###Data Set Two.  
+###Data Set Two.   
 
 Input  | MSE
 ------------- | -------------
@@ -49,3 +51,5 @@ px  | 0.073
 py  | 0.097
 vx  | 0.426
 vy  | 0.498
+
+![Test Two Visualization](https://github.com/asaggi/CarND-Extended-Kalman-Filter-Project/blob/master/Docs/Data_Set2.png "Test Two Visualization")
