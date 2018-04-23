@@ -35,10 +35,10 @@ In various different tests Extended Kalman Filter produces the below results. Th
 
 Input  | MSE
 ------------- | -------------
-px  | 0.103
-py  | 0.088
-vx  | 0.594
-vy  | 0.464
+px  | 0.0954
+py  | 0.0837
+vx  | 0.4499
+vy  | 0.4357
 
 ![Test One Visualization](https://github.com/asaggi/CarND-Extended-Kalman-Filter-Project/blob/master/Docs/Data_Set1.png "Test One Visualization")
 ---
@@ -47,9 +47,9 @@ vy  | 0.464
 
 Input  | MSE
 ------------- | -------------
-px  | 0.073
-py  | 0.097
-vx  | 0.426
-vy  | 0.498
+px  | 0.0744
+py  | 0.0958
+vx  | 0.4583
+vy  | 0.4943
 
 ![Test Two Visualization](https://github.com/asaggi/CarND-Extended-Kalman-Filter-Project/blob/master/Docs/Data_Set2.png "Test Two Visualization")

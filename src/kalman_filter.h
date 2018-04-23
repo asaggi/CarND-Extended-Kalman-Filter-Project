@@ -63,6 +63,9 @@ public:
    * @param z The measurement at k+1
    */
   void UpdateEKF(const Eigen::VectorXd &z);
+  
+private:
+	const float PI_Double;
 };
 
 #endif /* KALMAN_FILTER_H_ */

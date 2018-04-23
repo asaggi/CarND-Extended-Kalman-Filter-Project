@@ -28,8 +28,6 @@ public:
 private:
   // Small Number
   const double EPS; 
-  // Very Small Number
-  const double VEPS;
 };
 
 #endif /* TOOLS_H_ */

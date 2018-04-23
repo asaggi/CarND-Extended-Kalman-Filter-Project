@@ -3,7 +3,7 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-KalmanFilter::KalmanFilter() {}
+KalmanFilter::KalmanFilter() : PI_Double (2 * M_PI) {}
 
 KalmanFilter::~KalmanFilter() {}
 
@@ -39,35 +39,60 @@ void KalmanFilter::Update(const VectorXd &z) {
 	P_ = (I - K * H_) * P_;
 }
 
+VectorXd RadarCartesianToPolar(const VectorXd &x_state){
+	/*
+	 * convert radar measurements from cartesian coordinates (x, y, vx, vy) to
+	 * polar (rho, phi, rho_dot) coordinates
+	*/
+	float px, py, vx, vy;
+	px = x_state[0];
+	py = x_state[1];
+	vx = x_state[2];
+	vy = x_state[3];
+
+	float rho, phi, rho_dot;
+	rho = sqrt(px*px + py*py);
+	phi = atan2(py, px);  // returns values between -pi and pi
+
+	// if rho is very small, set it to 0.0001 to avoid division by 0 in computing rho_dot
+	if(rho < 0.000001)
+		rho = 0.000001;
+
+	rho_dot = (px * vx + py * vy) / rho;
+
+	VectorXd z_pred = VectorXd(3);
+	z_pred << rho, phi, rho_dot;
+
+	return z_pred;
+
+}
+
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
-	//recover state parameters
-	float px = x_(0);
-	float py = x_(1);
-	float vx = x_(2);
-	float vy = x_(3);
-    
-	// Equations for h_func below
-	float eq1 = sqrt(px * px + py * py);
-	//check division by zero
-	if(eq1 < .00001) {
-		px += .001;
-		py += .001;
-		eq1 = sqrt(px * px + py * py);
+	/**
+	TODO:
+	  * update the state by using Extended Kalman Filter equations
+	*/
+
+	// convert radar measurements from cartesian coordinates (x, y, vx, vy) to polar (rho, phi, rho_dot).
+	VectorXd z_pred = RadarCartesianToPolar(x_);
+	VectorXd y = z - z_pred;
+
+	// normalize the angle between -pi to pi
+	while(y(1) > M_PI){
+		y(1) -= PI_Double;
 	}
-	float eq2 = atan2(py,px);
-	float eq3 = (px*vx+py*vy)/eq1;
-    
-	//Feed in equations above
-	VectorXd H_func(3);
-	H_func << eq1, eq2, eq3;
-    
-	VectorXd y = z - H_func;
+
+	while(y(1) < -M_PI){
+		y(1) += PI_Double;
+	}
+
+	// following is exact the same as in the function of KalmanFilter::Update()
 	MatrixXd Ht = H_.transpose();
-	MatrixXd S = H_ * P_ * Ht + R_;
-	MatrixXd Si = S.inverse();
 	MatrixXd PHt = P_ * Ht;
+	MatrixXd S = H_ * PHt + R_;
+	MatrixXd Si = S.inverse();
 	MatrixXd K = PHt * Si;
-    
+
 	//new estimate
 	x_ = x_ + (K * y);
 	long x_size = x_.size();
